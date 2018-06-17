@@ -20,6 +20,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -36,6 +39,38 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
             const SizedBox(height: 120.0),
+            TextField(
+              controller: _usernameController,
+              decoration: InputDecoration(
+                filled: true,
+                labelText: 'Username'
+              ),
+            ),
+            SizedBox(height: 12.0),
+            TextField(
+              controller: _passwordController,
+              decoration: InputDecoration(
+                filled: true,
+                labelText: 'Password',
+              ),
+            ),
+            ButtonBar(
+              children: <Widget>[
+                FlatButton(
+                  child: Text('cancel'.toUpperCase()),
+                  onPressed: () {
+                    _usernameController.clear();
+                    _passwordController.clear();
+                  },
+                ),
+                RaisedButton(
+                  child: Text('next'.toUpperCase()),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
           ],
         ),
       ),
