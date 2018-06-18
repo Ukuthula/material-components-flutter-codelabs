@@ -14,6 +14,8 @@
 
 import 'package:flutter/material.dart';
 
+import 'colors.dart';
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -39,33 +41,46 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
             SizedBox(height: 120.0),
-            TextField(
-              controller: _usernameController,
-              decoration: InputDecoration(
-                filled: true,
-                labelText: 'Username',
+            PrimaryColorOverride(
+              color: kShrineAltYellow,
+              child: TextField(
+                controller: _usernameController,
+                decoration: InputDecoration(
+                  // filled: true,
+                  labelText: 'Username',
+                ),
               ),
             ),
             SizedBox(height: 12.0),
-            TextField(
-              controller: _passwordController,
-              decoration: InputDecoration(
-                filled: true,
-                labelText: 'Password',
+            PrimaryColorOverride(
+              color: kShrineAltYellow,
+              child: TextField(
+                controller: _passwordController,
+                decoration: InputDecoration(
+                  // filled: true,
+                  labelText: 'Password',
+                ),
+                obscureText: true,
               ),
-              obscureText: true,
             ),
             ButtonBar(
               children: <Widget>[
                 FlatButton(
                   child: Text('CANCEL'),
+                  shape: BeveledRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                  ),
                   onPressed: () {
                     _usernameController.clear();
                     _passwordController.clear();
                   },
                 ),
                 RaisedButton(
+                  elevation: 8.0,
                   child: Text('NEXT'),
+                  shape: BeveledRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                  ),
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -75,6 +90,22 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class PrimaryColorOverride extends StatelessWidget {
+  const PrimaryColorOverride({Key key, this.color, this.child})
+      : super(key: key);
+
+  final Color color;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Theme(
+      child: child, 
+      data: Theme.of(context).copyWith(primaryColor: color),
     );
   }
 }
